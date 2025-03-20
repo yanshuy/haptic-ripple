@@ -1,6 +1,6 @@
 {
     "name": "haptic-ripple",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "haptic feedback ripple effect for web interfaces",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
