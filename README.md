@@ -283,5 +283,3 @@ HapticRipple works in all modern browsers that support ES6 and CSS transforms.
 ## License
 
 MIT
-
-## Contributing

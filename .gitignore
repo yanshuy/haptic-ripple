@@ -1,2 +1,4 @@
 node_modules/
 package-lock.json
+haptic-ripple-1.0.0.tgz
+.npmignore
