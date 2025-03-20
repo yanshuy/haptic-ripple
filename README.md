@@ -12,6 +12,10 @@ A lightweight TypeScript library that adds customizable ripple effects to UI ele
 -   🪄 Multiple instances with different settings possible
 -   🌈 Supports CSS variables for theming
 
+## Live Demo
+
+Check out the [live demo](https://yanshuy.github.io/haptic-ripple/) to see HapticRipple in action with various configurations.
+
 ## Installation
 
 ```bash
@@ -97,6 +101,49 @@ You can use CSS variables for seamless integration with your design system:
 
 This approach allows you to maintain consistent theming throughout your application.
 
+## Balancing Size and Scale
+
+When configuring HapticRipple, it's important to balance the `size` and `scale` properties to achieve the best visual results:
+
+⚠️ **Important**: Using a small `size` with a large `scale` can cause distorted or pixelated ripple effects. The circle may appear stretched or unnatural when scaled too aggressively relative to its initial size.
+
+### Recommended Configurations:
+
+```javascript
+// Good balance - subtle effect
+createHapticRipple({
+    size: 20,
+    scale: 4,
+    initialOpacity: 0.5,
+}).enable(".subtle-buttons");
+
+// Good balance - more pronounced effect
+createHapticRipple({
+    size: 30,
+    scale: 6,
+    initialOpacity: 0.6,
+}).enable(".prominent-buttons");
+
+// Lower opacity for a more subtle effect
+createHapticRipple({
+    size: 25,
+    scale: 5,
+    initialOpacity: 0.3, // Lower opacity for subtlety
+    color: "rgba(100, 100, 100, 0.4)",
+}).enable(".ghost-buttons");
+```
+
+### Avoid:
+
+```javascript
+// Potentially problematic - small size with excessive scale
+createHapticRipple({
+    size: 8, // Too small
+    scale: 15, // Too much scaling
+    duration: 300,
+}).enable(".problematic-example");
+```
+
 ## API Reference
 
 ### `createHapticRipple(options?)`
@@ -156,6 +203,35 @@ ripple.disable(".my-elements");
 </script>
 ```
 
+### Subtle Low-Opacity Examples
+
+```html
+<button class="subtle-btn">Subtle Effect</button>
+<div class="ghost-card">Ghost Card</div>
+
+<script>
+    import { createHapticRipple } from "haptic-ripple";
+
+    // Subtle button ripple with low opacity
+    createHapticRipple({
+        color: "rgba(100, 100, 255, 0.3)", // Very transparent blue
+        size: 24,
+        duration: 400,
+        initialOpacity: 0.25, // Very low starting opacity
+        scale: 4,
+    }).enable(".subtle-btn");
+
+    // Ghost card with almost invisible ripple
+    createHapticRipple({
+        color: "rgba(200, 200, 200, 0.2)", // Very light gray, highly transparent
+        size: 30,
+        duration: 500,
+        initialOpacity: 0.2,
+        scale: 5,
+    }).enable(".ghost-card");
+</script>
+```
+
 ### Interactive Cards
 
 ```html
@@ -209,5 +285,3 @@ HapticRipple works in all modern browsers that support ES6 and CSS transforms.
 MIT
 
 ## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
