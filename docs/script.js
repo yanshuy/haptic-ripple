@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 // haptic-ripple.ts
 class HapticRipple {
     constructor(options = {}) {
@@ -222,5 +218,4 @@ function createHapticRipple(options) {
     };
 }
 
-exports.HapticRipple = HapticRipple;
-exports.createHapticRipple = createHapticRipple;
+export { HapticRipple, createHapticRipple };
