@@ -239,40 +239,44 @@
             </button>
         </div>
 
-        <script src="./script.js"></script>
-        <script>
-            HapticRipple.createHapticRipple({
+        <script type="module">
+            import { createHapticRipple } from "https://cdn.jsdelivr.net/gh/yanshuy/haptic-ripple/dist/index.esm.js";
+
+            // Now use createHapticRipple instead of HapticRipple.createHapticRipple
+            const primaryRipple = createHapticRipple({
                 color: "var(--ripple-blue)",
                 size: 24,
                 duration: 300,
                 initialOpacity: 0.7,
                 scale: 4,
-            }).enable("#btn-primary");
+            });
+            primaryRipple.enable("#btn-primary");
 
-            HapticRipple.createHapticRipple({
+            const secondaryRipple = createHapticRipple({
                 color: "rgba(108, 117, 125, 0.4)",
                 size: 16,
                 duration: 300,
                 initialOpacity: 0.6,
                 scale: 4,
-            }).enable("#btn-secondary");
+            });
+            secondaryRipple.enable("#btn-secondary");
 
-            HapticRipple.createHapticRipple({
+            const dangerRipple = createHapticRipple({
                 color: "rgba(200, 82, 82, 0.7)",
                 size: 56,
                 duration: 300,
                 initialOpacity: 0.7,
                 scale: 4,
-            }).enable("#btn-danger");
+            });
+            dangerRipple.enable("#btn-danger");
 
-            const cardRippleEffect = HapticRipple.createHapticRipple({
+            const cardRippleEffect = createHapticRipple({
                 color: "rgba(76, 110, 245, 0.7)",
                 size: 60,
                 duration: 300,
                 initialOpacity: 0.3,
                 scale: 10,
             });
-
             cardRippleEffect.enable(".card");
 
             const colorPicker = document.getElementById("color-picker");
