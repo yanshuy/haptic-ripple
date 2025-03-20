@@ -219,4 +219,3 @@ function createHapticRipple(options) {
 }
 
 export { HapticRipple, createHapticRipple };
-//# sourceMappingURL=index.esm.js.map

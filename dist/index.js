@@ -224,4 +224,3 @@ function createHapticRipple(options) {
 
 exports.HapticRipple = HapticRipple;
 exports.createHapticRipple = createHapticRipple;
-//# sourceMappingURL=index.js.map

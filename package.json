@@ -4,7 +4,6 @@
     "description": "haptic feedback ripple effect for web interfaces",
     "main": "dist/index.js",
     "module": "dist/index.esm.js",
-    "types": "dist/index.d.ts",
     "files": [
         "dist"
     ],
