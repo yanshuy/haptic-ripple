@@ -31,6 +31,7 @@
                 cursor: pointer;
                 font-size: 16px;
                 transition: background-color 0.2s;
+                -webkit-tap-highlight-color: transparent;
             }
 
             button:hover {
@@ -61,6 +62,7 @@
                 cursor: pointer;
                 margin-bottom: 16px;
                 transition: transform 0.2s, box-shadow 0.2s;
+                -webkit-tap-highlight-color: transparent;
             }
 
             .card:hover {
@@ -240,7 +242,8 @@
         </div>
 
         <script type="module">
-            import { createHapticRipple } from "https://cdn.jsdelivr.net/gh/yanshuy/haptic-ripple/dist/index.esm.js";
+            // import { createHapticRipple } from "https://cdn.jsdelivr.net/gh/yanshuy/haptic-ripple/dist/index.esm.js";
+            import { createHapticRipple } from "../dist/index.esm.js";
 
             // Now use createHapticRipple instead of HapticRipple.createHapticRipple
             const primaryRipple = createHapticRipple({
@@ -272,10 +275,10 @@
 
             const cardRippleEffect = createHapticRipple({
                 color: "rgba(76, 110, 245, 0.7)",
-                size: 60,
-                duration: 300,
-                initialOpacity: 0.3,
-                scale: 10,
+                size: 16,
+                duration: 500,
+                initialOpacity: 0.125,
+                scale: 120,
             });
             cardRippleEffect.enable(".card");
 
