@@ -111,6 +111,7 @@ class HapticRipple {
 
     public create(element: HTMLElement, event: MouseEvent | TouchEvent): void {
         // Prevent duplicate events (like touchstart followed by mousedown on same spot)
+        console.log(event);
 
         const now = Date.now();
         if (

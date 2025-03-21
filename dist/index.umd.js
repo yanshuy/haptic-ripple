@@ -88,6 +88,7 @@
         }
         create(element, event) {
             // Prevent duplicate events (like touchstart followed by mousedown on same spot)
+            console.log(event);
             const now = Date.now();
             if (now - HapticRipple.lastInteractionTime <
                 HapticRipple.INTERACTION_THRESHOLD) {
