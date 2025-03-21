@@ -207,8 +207,6 @@ touch-action: manipulation;
 
 Works in all modern browsers
 
-## [Live Demo](https://yanshuy.github.io/haptic-ripple/)
-
 ## License
 
 MIT License
