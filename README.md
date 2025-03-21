@@ -31,17 +31,18 @@ For best results, add these styles to your interactive elements:
 
 ```css
 button,
-.ripple-element {
-    position: relative;
+interactive-element {
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
 }
 ```
 
+`-webkit-tap-highlight-color: transparent;` is added by default on touch devices
+
 #### Why -webkit-tap-highlight-color?
 
 This property removes the default mobile browser highlight that can interfere with
-the ripple animation. Our custom ripple provides superior visual feedback while
+the ripple animation. Our custom ripple can provide superior visual feedback while
 maintaining accessibility.
 
 ## Features
