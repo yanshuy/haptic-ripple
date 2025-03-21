@@ -2,18 +2,7 @@
 
 A lightweight library that adds customizable ripple effects to UI elements, enhancing tactile feedback for clicks and touches.
 
-![Ripple Demo](https://path-to-your-demo-image.gif)
-
-## Features
-
--   ✨ Smooth, performant ripple animations using CSS transforms
--   🎨 Fully customizable (color, size, duration, opacity, scale, easing)
--   📱 Mobile-first design with touch event support
--   🧩 Simple API with both class and factory function approaches
--   🪄 Multiple independent instances supported
--   🌈 CSS variable integration for theming
-
-## [Live Demo](https://your-demo-link-here)
+## [Live Demo](https://yanshuy.github.io/haptic-ripple/)
 
 ## Installation
 
@@ -55,6 +44,15 @@ This property removes the default mobile browser highlight that can interfere wi
 the ripple animation. Our custom ripple provides superior visual feedback while
 maintaining accessibility.
 
+## Features
+
+-   ✨ Smooth, performant ripple animations using CSS transforms
+-   🎨 Fully customizable (color, size, duration, opacity, scale, easing)
+-   📱 Mobile-first design with touch event support
+-   🧩 Simple API with both class and factory function approaches
+-   🪄 Multiple independent instances supported
+-   🌈 CSS variable integration for theming
+
 ## Configuration Options
 
 | Property       | Type   | Default          | Description                              |
@@ -81,6 +79,25 @@ const customRipple = createHapticRipple({
 customRipple.enable("#main-button");
 customRipple.enable(document.querySelectorAll(".card"));
 ```
+
+### Large Element Animation Tuning
+
+For larger UI elements like cards or panels, slower animations with larger initial sizes create a more visually pleasing effect:
+
+```javascript
+// Perfect for cards or large touch surfaces
+const cardRippleEffect = createHapticRipple({
+    color: "rgba(76, 110, 245, 0.7)",
+    size: 250,
+    duration: 800, // Slower duration for smoother expansion
+    initialOpacity: 0.125, // Lower opacity for subtle effect
+    scale: 8,
+});
+
+cardRippleEffect.enable(".card-container");
+```
+
+This configuration creates a ripple effect that feels appropriate for the larger surface area, preventing the animation from appearing too aggressive or abrupt.
 
 ### Size/Scale Balance Guide
 
@@ -145,15 +162,6 @@ createHapticRipple({
 }).enable(".danger-action");
 ```
 
-## Browser Support
-
-Works in all modern browsers including:
-
--   Chrome 58+
--   Firefox 52+
--   Safari 10.1+
--   Edge 16+
-
 ## API Reference
 
 ### createHapticRipple(options?)
@@ -194,6 +202,12 @@ ripple.disable("#specific-element");
 /* Add to interactive elements */
 touch-action: manipulation;
 ```
+
+## Browser Support
+
+Works in all modern browsers
+
+## [Live Demo](https://yanshuy.github.io/haptic-ripple/)
 
 ## License
 

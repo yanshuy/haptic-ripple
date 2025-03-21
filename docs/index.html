@@ -54,7 +54,7 @@
             }
 
             .card {
-                position: relative;
+                /* position: relative; */
                 overflow: hidden;
                 padding: 20px;
                 border-radius: 8px;
@@ -275,10 +275,10 @@
 
             const cardRippleEffect = createHapticRipple({
                 color: "rgba(76, 110, 245, 0.7)",
-                size: 16,
-                duration: 500,
+                size: 250,
+                duration: 800,
                 initialOpacity: 0.125,
-                scale: 120,
+                scale: 8,
             });
             cardRippleEffect.enable(".card");
 

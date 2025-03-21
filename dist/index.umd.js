@@ -96,7 +96,7 @@
             HapticRipple.lastInteractionTime = now;
             // Prepare container for relative positioning if not already set
             const computedStyle = window.getComputedStyle(element);
-            if (computedStyle.position === "static") {
+            if (computedStyle.position != "relative") {
                 element.style.position = "relative";
             }
             // Create ripple element
