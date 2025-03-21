@@ -44,8 +44,6 @@
           z-index: -1;
           transform-origin: center;
           will-change: transform, opacity;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
           filter: blur(0.5px);
         }
       `;
@@ -169,6 +167,8 @@
                     element.addEventListener("touchstart", handleInteraction, {
                         passive: true,
                     });
+                    //@ts-ignore
+                    element.style["-webkit-tap-highlight-color"] = "transparent";
                 }
                 else {
                     // For desktop: use mouse events
@@ -218,7 +218,7 @@
     HapticRipple.COMMON_STYLE_ID = "haptic-ripple-common-styles";
     // Track last interaction time to prevent duplicate events
     HapticRipple.lastInteractionTime = 0;
-    HapticRipple.INTERACTION_THRESHOLD = 100; // ms
+    HapticRipple.INTERACTION_THRESHOLD = 200; // ms
     // Simple function for quick usage
     function createHapticRipple(options) {
         const ripple = new HapticRipple(options);

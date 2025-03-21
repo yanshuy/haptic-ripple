@@ -16,7 +16,7 @@ class HapticRipple {
 
     // Track last interaction time to prevent duplicate events
     private static lastInteractionTime = 0;
-    private static INTERACTION_THRESHOLD = 100; // ms
+    private static INTERACTION_THRESHOLD = 200; // ms
 
     private options: Required<HapticRippleOptions>;
     private styleElement: HTMLStyleElement | null = null;
@@ -64,8 +64,6 @@ class HapticRipple {
           z-index: -1;
           transform-origin: center;
           will-change: transform, opacity;
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
           filter: blur(0.5px);
         }
       `;
@@ -210,6 +208,8 @@ class HapticRipple {
                 element.addEventListener("touchstart", handleInteraction, {
                     passive: true,
                 });
+                //@ts-ignore
+                element.style["-webkit-tap-highlight-color"] = "transparent";
             } else {
                 // For desktop: use mouse events
                 element.addEventListener("mousedown", handleInteraction);
