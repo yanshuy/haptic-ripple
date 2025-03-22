@@ -1,5 +1,3 @@
-// haptic-ripple.ts
-
 interface HapticRippleOptions {
     color?: string;
     size?: number;
@@ -119,12 +117,6 @@ class HapticRipple {
         }
         HapticRipple.lastInteractionTime = now;
 
-        // Prepare container for relative positioning if not already set
-        const computedStyle = window.getComputedStyle(element);
-        if (computedStyle.position != "relative") {
-            element.style.position = "relative";
-        }
-
         // Create ripple element
         const haptic = document.createElement("div");
         haptic.className = `haptic-ripple-base haptic-ripple-${this.styleId}`;
@@ -192,6 +184,16 @@ class HapticRipple {
                 return;
             }
 
+            // Prepare container for relative positioning if not already set
+            const computedStyle = window.getComputedStyle(element);
+            if (computedStyle.position != "relative") {
+                element.style.position = "relative";
+            }
+            if (computedStyle.isolation != "isolate") {
+                element.style.isolation = "isolate";
+            }
+            element.style.userSelect = "text";
+
             // Mark this element as having this ripple instance
             this.instances.set(element, true);
 
@@ -212,7 +214,9 @@ class HapticRipple {
                 element.style["-webkit-tap-highlight-color"] = "transparent";
             } else {
                 // For desktop: use mouse events
-                element.addEventListener("mousedown", handleInteraction);
+                element.addEventListener("mousedown", handleInteraction, {
+                    passive: true,
+                });
             }
 
             // Store event handlers for potential cleanup
