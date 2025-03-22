@@ -56,14 +56,14 @@ maintaining accessibility.
 
 ## Configuration Options
 
-| Property       | Type   | Default          | Description                              |
-| -------------- | ------ | ---------------- | ---------------------------------------- |
-| color          | string | "oklab(0.5 0 0)" | CSS color value (supports CSS variables) |
-| size           | number | 16               | Initial ripple diameter in pixels        |
-| duration       | number | 300              | Animation duration in milliseconds       |
-| initialOpacity | number | 0.7              | Starting opacity (0-1)                   |
-| scale          | number | 4                | Growth multiplier during animation       |
-| easing         | string | "ease-out"       | CSS animation timing function            |
+| Property       | Type   | Default        | Description                              |
+| -------------- | ------ | -------------- | ---------------------------------------- |
+| color          | string | "rgb(0, 0, 0)" | CSS color value (supports CSS variables) |
+| size           | number | 16             | Initial ripple diameter in pixels        |
+| duration       | number | 300            | Animation duration in milliseconds       |
+| initialOpacity | number | 0.3            | Starting opacity (0-1)                   |
+| scale          | number | 4              | Growth multiplier during animation       |
+| easing         | string | "ease-out"     | CSS animation timing function            |
 
 ## Advanced Usage
 

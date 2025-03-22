@@ -10,10 +10,10 @@
             this.styleElement = null;
             this.instances = new Map();
             this.options = {
-                color: options.color || "oklab(0.5 0 0)",
+                color: options.color || "rgba(0, 0, 0)",
                 size: options.size || 16,
                 duration: options.duration || 300,
-                initialOpacity: options.initialOpacity || 0.7,
+                initialOpacity: options.initialOpacity || 0.3,
                 scale: options.scale || 4,
                 easing: options.easing || "ease-out",
             };
