@@ -119,12 +119,6 @@ createHapticRipple({
 });
 ```
 
-**Recommended Ranges:**
-
--   Size: 16-48px
--   Scale: 2-8x
--   Opacity: 0.2-0.7
-
 ## Dynamic Updates
 
 Modify ripple properties:
