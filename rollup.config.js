@@ -7,11 +7,6 @@ export default {
     input: "src/index.ts",
     output: [
         {
-            file: pkg.main,
-            format: "cjs",
-            exports: "named",
-        },
-        {
             file: pkg.module,
             format: "es",
             exports: "named",
@@ -29,7 +24,7 @@ export default {
         typescript({
             useTsconfigDeclarationDir: true,
             tsconfigOverride: {
-                exclude: ["**/*.test.ts", "**/*.test.tsx"],
+                exclude: ["**/*.test.ts"],
             },
         }),
     ],
