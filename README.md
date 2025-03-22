@@ -1,22 +1,34 @@
-# HapticRipple
+## HapticRipple Overview
 
-A lightweight library that adds customizable ripple effects to UI elements, enhancing tactile feedback for clicks and touches.
+HapticRipple is a lightweight JavaScript library for creating customizable ripple effects on UI elements - similar to the material design ripple effect but with more customization options. It enhances tactile feedback for clicks and touches on interactive elements.
 
 ## [Live Demo](https://yanshuy.github.io/haptic-ripple/)
 
-## Installation
+### Installation Options
 
-```bash
-npm install haptic-ripple
-```
+1. **npm/yarn**:
 
-or
+    ```bash
+    npm install haptic-ripple
+    ```
 
-```bash
-yarn add haptic-ripple
-```
+    or
 
-## Basic Usage
+    ```bash
+    yarn add haptic-ripple
+    ```
+
+2. **CDN (for direct browser usage)**:
+
+    ```html
+    <script src="https://cdn.jsdelivr.net/npm/haptic-ripple/dist/index.umd.js"></script>
+    ```
+
+3. **Local download**: Download the UMD build and include it in your project.
+
+### Basic Usage
+
+When using with bundlers:
 
 ```javascript
 import { createHapticRipple } from "haptic-ripple";
@@ -25,36 +37,30 @@ const ripple = createHapticRipple();
 ripple.enable("button"); // Apply to all buttons
 ```
 
-### Optimal Element Setup
+When using via CDN or local UMD file:
 
-For best results, add these styles to your interactive elements:
+```javascript
+// Access through the HapticRipple namespace
+const ripple = HapticRipple.createHapticRipple({
+    color: "rgba(255, 255, 255, 0.7)",
+    size: 20,
+    duration: 400,
+});
 
-```css
-button,
-interactive-element {
-    overflow: hidden;
-    -webkit-tap-highlight-color: transparent;
-}
+ripple.enable("#my-button");
 ```
-
-`-webkit-tap-highlight-color: transparent;` is added by default on touch devices
-
-#### Why -webkit-tap-highlight-color?
-
-This property removes the default mobile browser highlight that can interfere with
-the ripple animation. Our custom ripple can provide superior visual feedback while
-maintaining accessibility.
 
 ## Features
 
--   ✨ Smooth, performant ripple animations using CSS transforms
 -   🎨 Fully customizable (color, size, duration, opacity, scale, easing)
 -   📱 Mobile-first design with touch event support
 -   🧩 Simple API with both class and factory function approaches
 -   🪄 Multiple independent instances supported
 -   🌈 CSS variable integration for theming
 
-## Configuration Options
+### Configuration Options
+
+You can customize the ripple effect with these parameters:
 
 | Property       | Type   | Default        | Description                              |
 | -------------- | ------ | -------------- | ---------------------------------------- |
@@ -65,40 +71,62 @@ maintaining accessibility.
 | scale          | number | 4              | Growth multiplier during animation       |
 | easing         | string | "ease-out"     | CSS animation timing function            |
 
-## Advanced Usage
+### Common Use Cases
 
-```javascript
-const customRipple = createHapticRipple({
-    color: "rgba(76, 110, 245, 0.7)",
-    size: 24,
-    duration: 400,
-    initialOpacity: 0.3,
-    scale: 5,
-});
+1. **Basic buttons**:
 
-// Apply to multiple element types
-customRipple.enable("#main-button");
-customRipple.enable(document.querySelectorAll(".card"));
-```
+    ```javascript
+    const buttonRipple = createHapticRipple({
+        color: "rgba(255, 255, 255, 0.7)",
+        size: 20,
+    });
 
-### Large Element Animation Tuning
+    buttonRipple.enable(".my-button");
+    ```
 
-For larger UI elements like cards or panels, slower animations with larger initial sizes create a more visually pleasing effect:
+2. **Larger UI elements** (cards, panels):
 
-```javascript
-// Perfect for cards or large touch surfaces
-const cardRippleEffect = createHapticRipple({
-    color: "rgba(76, 110, 245, 0.7)",
-    size: 250,
-    duration: 800, // Slower duration for smoother expansion
-    initialOpacity: 0.125, // Lower opacity for subtle effect
-    scale: 8,
-});
+    ```javascript
+    const cardRippleEffect = createHapticRipple({
+        color: "rgba(76, 110, 245, 0.7)",
+        size: 250,
+        duration: 700,
+        initialOpacity: 0.125,
+        scale: 8,
+    });
 
-cardRippleEffect.enable(".card-container");
-```
+    cardRippleEffect.enable(".card-container");
+    ```
 
-This configuration creates a ripple effect that feels appropriate for the larger surface area, preventing the animation from appearing too aggressive or abrupt.
+    For larger UI elements like cards or panels, slower animations with larger initial sizes prevents the animation from appearing too aggressive or abrupt.
+
+3. **Using CSS variables for theming**:
+
+    ```css
+    :root {
+        --primary-ripple-color: rgba(76, 110, 245, 0.7);
+        --danger-ripple-color: rgba(250, 82, 82, 0.5);
+    }
+    ```
+
+    ```javascript
+    createHapticRipple({
+        color: "var(--primary-ripple-color)",
+    }).enable(".primary-action");
+    ```
+
+4. **Dynamically updating properties**:
+
+    ```javascript
+    const adaptiveRipple = createHapticRipple();
+
+    // Update properties later
+    adaptiveRipple.update({
+        color: "#ff000080",
+        duration: 500,
+        scale: 6,
+    });
+    ```
 
 ### Size/Scale Balance Guide
 
@@ -119,44 +147,6 @@ createHapticRipple({
 });
 ```
 
-## Dynamic Updates
-
-Modify ripple properties:
-
-```javascript
-const adaptiveRipple = createHapticRipple();
-
-// Update multiple properties
-adaptiveRipple.update({
-    color: "#ff000080",
-    duration: 500,
-    scale: 6,
-});
-```
-
-## Theming with CSS Variables
-
-```css
-:root {
-    --primary-ripple-color: rgba(76, 110, 245, 0.7);
-    --danger-ripple-color: rgba(250, 82, 82, 0.5);
-}
-
-.danger-ripple {
-    background-color: var(--danger-ripple-color);
-}
-```
-
-```javascript
-createHapticRipple({
-    color: "var(--primary-ripple-color)",
-}).enable(".primary-action");
-
-createHapticRipple({
-    color: "var(--danger-ripple-color)",
-}).enable(".danger-action");
-```
-
 ## API Reference
 
 ### createHapticRipple(options?)
@@ -164,11 +154,11 @@ createHapticRipple({
 Factory function returns controller object:
 
 ```typescript
-interface HapticController {
-    enable(selector: string | HTMLElement | HTMLElement[]): void;
-    disable(selector: string | HTMLElement | HTMLElement[]): void;
-    update(options: Partial<HapticRippleOptions>): void;
-}
+function createHapticRipple(options?: HapticRippleOptions): {
+    enable: (selector: string | HTMLElement | HTMLElement[]) => void;
+    disable: (selector: string | HTMLElement | HTMLElement[]) => void;
+    update: (newOptions: HapticRippleOptions) => void;
+};
 ```
 
 ### Class API
