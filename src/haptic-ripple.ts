@@ -25,7 +25,7 @@ class HapticRipple {
 
     constructor(options: HapticRippleOptions = {}) {
         this.options = {
-            color: options.color || "rgba(0, 0, 0)",
+            color: options.color || "rgba(0, 0, 0",
             size: options.size || 16,
             duration: options.duration || 300,
             initialOpacity: options.initialOpacity || 0.3,
