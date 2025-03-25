@@ -87,12 +87,20 @@ You can customize the ripple effect with these parameters:
 2. **Larger UI elements** (cards, panels):
 
     ```javascript
+    // Avoid extreme combinations
+    createHapticRipple({
+        size: 8, // Too small
+        scale: 100, // Excessive scaling
+    });
+    ```
+
+    ```javascript
     const cardRippleEffect = createHapticRipple({
-        color: "rgba(76, 110, 245, 0.7)",
-        size: 250,
-        duration: 700,
+        color: "rgba(0, 0, 200, 0.3)",
+        size: 600,
+        duration: 500,
         initialOpacity: 0.125,
-        scale: 8,
+        scale: 3,
     });
 
     cardRippleEffect.enable(".card-container");
@@ -127,25 +135,6 @@ You can customize the ripple effect with these parameters:
         scale: 6,
     });
     ```
-
-### Size/Scale Balance Guide
-
-Achieve optimal visual quality by balancing these properties:
-
-```javascript
-// Ideal configuration
-createHapticRipple({
-    size: 24, // Medium initial size
-    scale: 4, // Moderate growth
-    initialOpacity: 0.4,
-});
-
-// Avoid extreme combinations
-createHapticRipple({
-    size: 8, // Too small
-    scale: 100, // Excessive scaling
-});
-```
 
 ## API Reference
 

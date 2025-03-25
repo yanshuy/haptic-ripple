@@ -37,7 +37,7 @@ class HapticRipple {
           z-index: -1;
           transform-origin: center;
           will-change: transform, opacity;
-          filter: blur(0.5px);
+          transition-property: transform, opacity;
         }
       `;
         document.head.appendChild(commonStyle);
@@ -62,17 +62,8 @@ class HapticRipple {
           
           height: var(--haptic-size);
           background-color: var(--haptic-color);
-        }
-        
-        @keyframes haptic-ripple-grow-${this.styleId} {
-          0% {
-            transform: scale(1);
-            opacity: var(--haptic-initial-opacity);
-          }
-          100% {
-            transform: scale(var(--haptic-scale));
-            opacity: 0;
-          }
+          transition-duration: var(--haptic-duration);
+          transition-timing-function: var(--haptic-easing);
         }
       `;
         document.head.appendChild(this.styleElement);
@@ -103,20 +94,64 @@ class HapticRipple {
         // Position the ripple precisely at click position
         const rect = element.getBoundingClientRect();
         const offsetX = this.options.size / 2;
-        // Apply position immediately
+        // Apply initial state
         Object.assign(haptic.style, {
             left: `${clientX - rect.left - offsetX}px`,
             top: `${clientY - rect.top - offsetX}px`,
-            animation: `haptic-ripple-grow-${this.styleId} ${this.options.duration}ms ${this.options.easing} forwards`,
+            transform: "scale(1)",
+            opacity: `${this.options.initialOpacity}`,
         });
         // Append to target element
         element.appendChild(haptic);
-        // Remove the element after animation completes
-        setTimeout(() => {
-            if (haptic.parentNode === element) {
-                element.removeChild(haptic);
+        // Trigger reflow to ensure initial state is applied
+        haptic.offsetHeight;
+        // Expand ripple
+        requestAnimationFrame(() => {
+            Object.assign(haptic.style, {
+                transform: `scale(${this.options.scale})`,
+                opacity: `${this.options.initialOpacity}`,
+            });
+        });
+        const handleInteractionEnd = (event) => {
+            // Fade out ripple
+            Object.assign(haptic.style, {
+                opacity: "0",
+            });
+            // Remove ripple after transition
+            setTimeout(() => {
+                if (haptic.parentNode === element) {
+                    element.removeChild(haptic);
+                }
+            }, this.options.duration);
+            // Remove event listeners
+            if ("ontouchstart" in window) {
+                element.removeEventListener("touchend", handleInteractionEnd);
+                element.removeEventListener("touchcancel", handleInteractionEnd);
             }
-        }, this.options.duration);
+            else {
+                element.removeEventListener("mouseup", handleInteractionEnd);
+                element.removeEventListener("mouseleave", handleInteractionEnd);
+            }
+        };
+        if ("ontouchstart" in window) {
+            element.addEventListener("touchend", handleInteractionEnd, {
+                passive: true,
+            });
+            element.addEventListener("touchcancel", handleInteractionEnd, {
+                passive: true,
+            });
+        }
+        else {
+            element.addEventListener("mouseup", handleInteractionEnd, {
+                passive: true,
+            });
+            element.addEventListener("mouseleave", handleInteractionEnd, {
+                passive: true,
+            });
+        }
+        element._hapticRippleHandlers = element._hapticRippleHandlers || {};
+        element._hapticRippleHandlers[this.styleId].endHandler =
+            handleInteractionEnd;
     }
     updateOptions(options) {
         this.options = Object.assign(Object.assign({}, this.options), options);
@@ -176,7 +211,8 @@ class HapticRipple {
             // Store event handlers for potential cleanup
             element._hapticRippleHandlers = element._hapticRippleHandlers || {};
             element._hapticRippleHandlers[this.styleId] = {
-                handler: handleInteraction,
+                startHandler: handleInteraction,
+                endHandler: null,
                 isTouchEnabled: "ontouchstart" in window,
             };
         });
@@ -202,10 +238,12 @@ class HapticRipple {
             }
             const handlers = element._hapticRippleHandlers[this.styleId];
             if (handlers.isTouchEnabled) {
-                element.removeEventListener("touchstart", handlers.handler);
+                element.removeEventListener("touchstart", handlers.startHandler);
+                element.removeEventListener("touchstart", handlers.endHandler);
             }
             else {
-                element.removeEventListener("mousedown", handlers.handler);
+                element.removeEventListener("mousedown", handlers.startHandler);
+                element.removeEventListener("mousedown", handlers.endHandler);
             }
             delete element._hapticRippleHandlers[this.styleId];
             this.instances.delete(element);
@@ -217,7 +255,7 @@ HapticRipple.commonStylesInjected = false;
 HapticRipple.COMMON_STYLE_ID = "haptic-ripple-common-styles";
 // Track last interaction time to prevent duplicate events
 HapticRipple.lastInteractionTime = 0;
-HapticRipple.INTERACTION_THRESHOLD = 200; // ms
+HapticRipple.INTERACTION_THRESHOLD = 100; // ms
 // Simple function for quick usage
 function createHapticRipple(options) {
     const ripple = new HapticRipple(options);

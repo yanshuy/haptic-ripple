@@ -241,8 +241,8 @@
         </div>
 
         <script type="module">
-            import { createHapticRipple } from "https://cdn.jsdelivr.net/gh/yanshuy/haptic-ripple/dist/index.esm.js";
-            //import { createHapticRipple } from "../dist/index.esm.js";
+            // import { createHapticRipple } from "https://cdn.jsdelivr.net/gh/yanshuy/haptic-ripple/dist/index.esm.js";
+            import { createHapticRipple } from "../dist/index.esm.js";
 
             const primaryRipple = createHapticRipple({
                 color: "var(--ripple-blue)",
@@ -272,11 +272,11 @@
             dangerRipple.enable("#btn-danger");
 
             const cardRippleEffect = createHapticRipple({
-                color: "rgba(76, 110, 245, 0.7)",
-                size: 250,
-                duration: 700,
+                color: "rgba(0, 0, 200, 0.3)",
+                size: 600,
+                duration: 500,
                 initialOpacity: 0.125,
-                scale: 8,
+                scale: 3,
             });
             cardRippleEffect.enable(".card");
 

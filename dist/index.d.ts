@@ -28,7 +28,8 @@ declare global {
     interface HTMLElement {
         _hapticRippleHandlers?: {
             [key: string]: {
-                handler: (event: MouseEvent | TouchEvent) => void;
+                startHandler: (event: MouseEvent | TouchEvent) => void;
+                endHandler: (event: MouseEvent | TouchEvent) => void;
                 isTouchEnabled: boolean;
             };
         };
