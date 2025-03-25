@@ -1,5 +1,4 @@
 node_modules/
-dist/
 test/
 package-lock.json
 haptic-ripple-*.tgz
